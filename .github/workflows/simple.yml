@@ -18,8 +18,17 @@ jobs:
           import platform
           print(platform.processor())
         shell: python
-  run-shell-command-windows:
+  run-shell-command-windows-parallel:
     runs-on: windows-latest
+    steps:
+      - name: Directory Powershell
+        run: Get-Location
+      - name: Directory Bash
+        run: pwd
+        shell: bash
+  run-shell-command-windows-series:
+    runs-on: windows-latest
+    needs: ["run-shell-command-ubuntu"]
     steps:
       - name: Directory Powershell
         run: Get-Location
