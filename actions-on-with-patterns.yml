@@ -1,0 +1,25 @@
+name: Actions Workflow
+
+on:
+  push:
+    branches:
+      - master
+      - "feature/*" # matches feature/featA, feature/featB but not feature/featA/a
+      # - "feature/**" # matches feature/featA, feature/featB, and feature/featA/a
+      - "!feature/featC" # Exclude feature/featC
+    # tags:
+    #   - "v1.*"
+    tags-ignore:
+      - "v1.*"
+    paths:
+      - "**.js" # If any js file is changed
+      - "!file-to-ignore.js"
+    # paths-ignore:
+    #   - "docs/**"
+
+jobs:
+  run-github-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: payload
+        run: echo ${{ github.event.client_payload.env }}
