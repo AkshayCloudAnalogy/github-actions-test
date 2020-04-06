@@ -1,0 +1,14 @@
+name: Functions
+
+on: push
+
+jobs:
+  functions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump Functions
+        run: |
+          echo ${{ contains('hello', 'll') }}
+          echo ${{ startsWith('hello', 'he') }}
+          echo ${{ endsWith('hello', 'lo') }}
+          echo ${{ format('Hello {0} {1} {2}', 'World', '!', '!') }}
