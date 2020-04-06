@@ -1,6 +1,8 @@
 name: Functions
 
-on: push
+on:
+  - push
+  - pull_request
 
 jobs:
   functions:
@@ -12,3 +14,18 @@ jobs:
           echo ${{ startsWith('hello', 'he') }}
           echo ${{ endsWith('hello', 'lo') }}
           echo ${{ format('Hello {0} {1} {2}', 'World', '!', '!') }}
+  conditional:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - name: Success Step
+        run: echo 'Success Step'
+      - name: Fail Step
+        if: success()
+        run: eccho 'Push'
+      - name: Run after failure
+        if: failure()
+        run: echo 'Run After Failure'
+      - name: Always Run Step
+        if: always()
+        run: echo 'Always Run Step'
