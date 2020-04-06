@@ -26,6 +26,8 @@ jobs:
       - name: Run after failure
         if: failure()
         run: echo 'Run After Failure'
+      - name: Not Run after failure
+        run: echo 'Not Run after failure if not failure() or always()'
       - name: Always Run Step
         if: always()
         run: echo 'Always Run Step'
